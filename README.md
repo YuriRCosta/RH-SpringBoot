@@ -1,6 +1,8 @@
 <h1>Projeto de Cadastro de Pessoas e Currículos</h1>
 <p>Este é um projeto desenvolvido em Java utilizando Spring Boot, Spring Security, Thymeleaf, Jasper Reports para cadastrar pessoas, seus currículos e informações de contato, podendo buscar por essas pessoas e imprimir relatorios e os curriculos. Além disso, permite que os usuários com diferentes funções tenham diferentes permissões, definidas por suas "Roles", alem das senhas estarem criptografadas.</p>
 
+Link para ver o projeto funcionando no meu LinkedIn: https://www.linkedin.com/feed/update/urn:li:activity:7056406806155206656/
+
 <h2>Requisitos</h2>
 Para rodar este projeto, é necessário ter o Java 8 ou superior e o Maven instalados em sua máquina. É recomendável também ter o PostgreSQL ou outro banco de dados relacional instalado e configurado.
 
