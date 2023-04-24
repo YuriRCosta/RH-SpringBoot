@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+	<title>Cadastro Pessoa</title>
+	<div th:replace="~{/fragments/header :: myheader}"></div>
+	<link type="text/css" rel="stylesheet" href="/css/cadastroPessoa.css" media="screen,projection" />
+	<link type="text/css" rel="stylesheet" href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" />
+</head>
+
+<body>
+	<div th:replace="~{/fragments/navBar :: navBar}"></div>
+	<div th:each="m : ${msg}">
+		<span th:text="${m}"></span>
+	</div>
+	<div class="container py-5">
+		<h2 class="text-center mb-4">Formulário de Cadastro</h2>
+		<form enctype="multipart/form-data" class="col s12" onsubmit="return validarCampos() ? true : false"
+			id="formCadPessoa" method="post" action="/salvarpessoa" th:object="${pessoaobj}">
+			<div class="input-field col s6">
+				<input hidden th:field="*{id}" type="text" readonly="true" class="form-control idText" name="id" id="id">
+			</div>
+			<div class="row">
+				<div class="input-field col s6">
+					<label for="nome" class="validate">Nome</label>
+					<input required="true" th:field="*{nome}" type="text" class="form-control" name="nome" id="nome">
+				</div>
+				<div class="input-field col s6">
+					<label for="sobrenome" class="validate">Sobrenome</label>
+					<input required="true" th:field="*{sobrenome}" type="text" class="form-control" name="sobrenome"
+						id="sobrenome">
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s6">
+					<label for="idade" class="form-label">Idade</label>
+					<input required="true" th:field="*{idade}" type="number" class="form-control" name="idade"
+						id="idade">
+				</div>
+				<div class="input-field col s6">
+					<select th:field="*{profissao}" name="profissao" id="profissao">
+						<option value="" disabled selected>Selecione</option>
+						<option th:each="p : ${profissoes}" th:value="${p.id}" th:text="${p.nome}"></option>
+					</select>
+					<label>Profissao</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s6">
+					<select th:field="*{sexo}" name="sexo" id="sexo">
+						<option value="" disabled selected>Selecione</option>
+						<option value="Masculino">Masculino</option>
+						<option value="Feminino">Feminino</option>
+						<option value="Outro">Outro</option>
+						<option value="NAO_INFORMADO">Prefiro nao informar</option>
+					</select>
+					<label>Genero</label>
+				</div>
+				<div class="input-field col s6">
+					<label for="cep" class="validate">CEP</label>
+					<input required="true" th:field="*{cep}" type="text" class="form-control" name="cep" id="cep">
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s6">
+					<label for="cidade" class="validate">Cidade</label>
+					<input placeholder="Cidade" required="true" th:field="*{cidade}" type="text" class="form-control"
+						name="cidade" id="cidade">
+				</div>
+				<div class="input-field col s6">
+					<label for="uf" class="validate">Estado</label>
+					<input placeholder="Estado" required="true" th:field="*{uf}" type="text" class="form-control"
+						name="uf" id="uf">
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s6">
+					<label for="dataNascimento" class="validate">Data de Nascimento</label>
+					<input placeholder="" th:field="*{dataNascimento}" type="date" class="form-control"
+						name="dataNascimento" id="dataNascimento">
+				</div>
+				<div class="input-field file-field col s6">
+					<div class="btn">
+						<span>File</span>
+						<input type="file" id="file" name="file">
+					</div>
+					<div class="file-path-wrapper">
+						<input class="file-path validate" type="text" >
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<button class="btn waves-effect waves-light" type="submit" name="action">Salvar
+					<i class="material-icons right">send</i>
+				</button>
+				<button class="btn waves-effect waves-light"
+					onclick="document.getElementById('formCadPessoa').reset()">Novo
+					<i class="material-icons right">autorenew</i>
+				</button>
+			</div>
+		</form>
+	</div>
+
+	<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/js/materialize.js"></script>
+	<script type="text/javascript" src="/js/materialize.min.js"></script>
+	<script type="text/javascript">
+		document.addEventListener('DOMContentLoaded', function () {
+			var elems = document.querySelectorAll('.dropdown-trigger');
+			M.Dropdown.init(elems, {
+				coverTrigger: false
+			});
+		});
+
+		function validarCampos() {
+			var nome = $('#nome').val();
+			var sobrenome = $('#sobrenome').val();
+			if (nome == null || nome.trim() == '') {
+				alert("Informe um nome.")
+				return false;
+			} else if (sobrenome == null || sobrenome.trim() == '') {
+				alert("Informe um sobrenome.")
+				return false;
+			}
+			return true;
+		}
+
+		$(document).ready(function () {
+			$('select').formSelect();
+		});
+
+		$(document).ready(function () {
+
+			function limpa_formulário_cep() {
+				// Limpa valores do formulário de cep.
+				$("#rua").val("");
+				$("#bairro").val("");
+				$("#cidade").val("");
+				$("#uf").val("");
+				$("#ibge").val("");
+			}
+
+			//Quando o campo cep perde o foco.
+			$("#cep").blur(function () {
+
+				//Nova variável "cep" somente com dígitos.
+				var cep = $(this).val().replace(/\D/g, '');
+
+				//Verifica se campo cep possui valor informado.
+				if (cep != "") {
+
+					//Expressão regular para validar o CEP.
+					var validacep = /^[0-9]{8}$/;
+
+					//Valida o formato do CEP.
+					if (validacep.test(cep)) {
+
+						//Preenche os campos com "..." enquanto consulta webservice.
+						$("#rua").val("...");
+						$("#bairro").val("...");
+						$("#cidade").val("...");
+						$("#uf").val("...");
+						$("#ibge").val("...");
+
+						//Consulta o webservice viacep.com.br/
+						$.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
+
+							if (!("erro" in dados)) {
+								//Atualiza os campos com os valores da consulta.
+								$("#rua").val(dados.logradouro);
+								$("#bairro").val(dados.bairro);
+								$("#cidade").val(dados.localidade);
+								$("#uf").val(dados.uf);
+								$("#ibge").val(dados.ibge);
+							} //end if.
+							else {
+								//CEP pesquisado não foi encontrado.
+								limpa_formulário_cep();
+								alert("CEP não encontrado.");
+							}
+						});
+					} //end if.
+					else {
+						//cep é inválido.
+						limpa_formulário_cep();
+						alert("Formato de CEP inválido.");
+					}
+				} //end if.
+				else {
+					//cep sem valor, limpa formulário.
+					limpa_formulário_cep();
+				}
+			});
+		});
+	</script>
+</body>
+
+</html>

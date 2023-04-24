@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+	<title>Cadastro Pessoa</title>
+	<div th:replace="~{/fragments/header :: myheader}"></div>
+	<link type="text/css" rel="stylesheet" href="/css/cadastroPessoa.css" media="screen,projection" />
+</head>
+
+<body>
+	<div th:replace="~{/fragments/navBar :: navBar}"></div>
+	<div class="container py-5">
+		<h2 class="text-center mb-4">Cadastro de Telefone</h2>
+
+		<form id="formCadTelefone" method="post" th:action="@{/adicionarTelefone/{idpessoa}(idpessoa=${pessoaobj.id})}"
+			th:object="${pessoaobj}">
+			<div class="input-field col s6">
+				<label for="id" class="validate">ID</label>
+				<input type="text" readonly="true" class="form-control" name="id" id="id">
+			</div>
+			<div class="input-field col s6">
+				<label for="nome" class="validate">Nome</label>
+				<input readonly="true" th:field="*{nome}" type="text" class="form-control" name="nome" id="nome">
+			</div>
+			<div class="input-field col s6">
+				<label for="numero" class="form-label">Telefone</label>
+				<input required="true" placeholder="(__) _____-____" type="text" class="form-control" name="numero"
+					id="numero">
+			</div>
+			<div class="input-field col s12">
+				<select name="tipo" id="tipo">
+					<option value="" disabled selected>Selecione</option>
+					<option value="Casa">Residencial</option>
+					<option value="Pessoal">Pessoal</option>
+					<option value="Trabalho">Trabalho</option>
+				</select>
+				<label>Tipo</label>
+			</div>
+			<div>
+				<button class="btn waves-effect waves-light" type="submit" name="action">Adicionar
+					<i class="material-icons right">phone</i>
+				</button>
+			</div>
+
+		</form>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+	<script type="text/javascript" src="/js/materialize.js"></script>
+	<script type="text/javascript" src="/js/materialize.min.js"></script>
+	<script type="text/javascript">
+		document.addEventListener('DOMContentLoaded', function () {
+			var elems = document.querySelectorAll('.dropdown-trigger');
+			M.Dropdown.init(elems, {
+				coverTrigger: false
+			});
+		});
+
+		$('#numero').inputmask("(99) 99999-9999");
+
+		$(document).ready(function () {
+			$('select').formSelect();
+		});
+	</script>
+</body>
+
+</html>

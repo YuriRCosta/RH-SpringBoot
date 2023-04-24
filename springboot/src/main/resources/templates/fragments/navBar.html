@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<body>
+	<div th:fragment="navBar">
+		<ul id="dropdown1" class="dropdown-content">
+			
+				<li><a style="font-size: 15px;" href="/cadastropessoa">Pessoa</a></li>
+			
+		</ul>
+		<ul id="dropdown2" class="dropdown-content">
+			<li><a style="font-size: 15px;" href="/pesquisapessoa">Pessoa</a></li>
+			<li><a style="font-size: 15px;" href="/pesquisatelefones">Telefone</a></li>
+		</ul>
+		<nav class="navBar" style="box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2)">
+			<div class="nav-wrapper">
+				<a href="#!" class="brand-logo">
+					<img src="/img/logo1.png">
+				</a>
+				<ul style="margin: 0px;" class="right hide-on-med-and-down">
+					<li><a style="font-size: 15px;" href="/inicio">Inicio
+							<i class="material-icons right">home</i>
+						</a></li>
+					
+					<li>
+						<div sec:authorize="hasRole('ROLE_ADMIN')">
+						<a style="font-size: 15px;" class="dropdown-trigger" href="#!" data-target="dropdown1">Cadastro<i
+								class="material-icons right">arrow_drop_down</i></a></div></li>
+					
+					<!-- Dropdown Trigger -->
+					<li><a style="font-size: 15px;" class="dropdown-trigger" href="#!" data-target="dropdown2">Pesquisa<i
+								class="material-icons right">arrow_drop_down</i></a></li>
+					<li><a style="font-size: 15px;" href="/logout">Sair
+							<i class="material-icons right">arrow_forward</i>
+						</a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+</body>
+
+</html>

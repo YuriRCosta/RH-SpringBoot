@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+	<title>Pesquisa Pessoa</title>
+	<div th:replace="~{/fragments/header :: myheader}"></div>
+	<link type="text/css" rel="stylesheet" href="/css/pesquisaPessoa.css" media="screen,projection" />
+</head>
+
+<body>
+	<div th:replace="~{/fragments/navBar :: navBar}"></div>
+
+	
+
+	<div class="container">
+		
+	<h2 class="text-center">Tabela de Cadastros</h2>
+	<form id="formPesquisaTelefone" action="/pesquisartelefone" method="post">
+		<div class="input-field col s6 searchUser">
+			<input name="nomePesquisa" id="nomePesquisa" type="text">
+			<button role="button" type="submit" class="btn btn-info searchUserButton">
+				<i class="material-icons">search</i>
+			</button>
+			<button onclick="document.getElementById('formPesquisaTelefone').method = 'get'"
+				class="btn waves-effect waves-light buttonPdf" type="submit">PDF
+				<i class="material-icons right">picture_as_pdf</i>
+			</button>
+			<label for="nomePesquisa">Nome</label>
+		</div>
+	</form>
+	<table class="centered striped">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>ID Dono</th>
+				<th>Nome</th>
+				<th>Sobrenome</th>
+				<th>Numero</th>
+				<th>Tipo</th>
+				<th>Excluir</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="telefone : ${telefones.content}">
+				<td th:text="${telefone.id}"></td>
+				<td th:text="${telefone.pessoa.id}"></td>
+				<td th:text="${telefone.pessoa.nome}"></td>
+				<td th:text="${telefone.pessoa.sobrenome}"></td>
+				<td th:text="${telefone.numero}"></td>
+				<td th:text="${telefone.tipo}"></td>
+				<td><a th:href="@{/excluirtelefone/{idtelefone}(idtelefone=${telefone.id})}" role="button" class="btn btn-info">
+						<i class="material-icons">delete</i>
+					</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<ul class="pagination">
+			<li th:if="${telefones.hasPrevious()}" class="waves-effect" s><a
+					th:href="@{/telefonespag(page=${telefones.number-1}, size=${telefones.size}, nomePesquisa=${nomePesquisa})}"><i
+						class="material-icons">chevron_left</i></a></li>
+			<li th:if="${telefones.hasPrevious() == false}"><a href="#!"><i class="material-icons">chevron_left</i></a>
+			</li>
+			<li th:each="i: ${#numbers.sequence(0, telefones.totalPages - 1)}" class=""><a
+					th:href="@{/telefonespag(page=${i}, size=${telefones.size}, nomePesquisa=${nomePesquisa})}">[[ ${i} + 1 ]]</a></li>
+			<li th:if="${telefones.hasNext()}" class="waves-effect"><a
+					th:href="@{/telefonespag(page=${telefones.number+1}, size=${telefones.size}, nomePesquisa=${nomePesquisa})}"><i
+						class="material-icons">chevron_right</i></a></li>
+			<li th:if="${telefones.hasNext() == false}"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+		</ul>
+	</div>
+	<script type="text/javascript" src="/js/materialize.js"></script>
+	<script type="text/javascript" src="/js/materialize.min.js"></script>
+	<script type="text/javascript">
+		document.addEventListener('DOMContentLoaded', function () {
+			var elems = document.querySelectorAll('.dropdown-trigger');
+			M.Dropdown.init(elems, {
+				coverTrigger: false
+			});
+		});
+	</script>
+</body>
+
+</html>

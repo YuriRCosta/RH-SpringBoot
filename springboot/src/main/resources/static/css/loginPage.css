@@ -1,0 +1,156 @@
+@charset "ISO-8859-1";
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 0;
+	padding: 0;
+	background:
+		url("https://cdn.discordapp.com/attachments/1088577939211292765/1088659527555092531/n0xzerazada_modern_background_image_theme_blue_with_some_detail_73a8ede5-71f9-4832-94d0-1c1f6209531c.png")
+		no-repeat center center fixed;
+	background-size: cover;
+	font-family: sans-serif;
+}
+
+h3{
+    font-family:Quicksand;
+}
+
+.msg {
+	width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.alert{
+	position: absolute;
+  width:300px;
+  margin:20px auto;
+  margin-top: 50px;
+  padding:10px 30px;
+  border-radius:5px;
+  box-shadow:0 0 20px rgba(0, 0, 0, 0.8);
+  background-color: #f7a7a3;
+}
+
+.close{
+  position:absolute;
+  width:30px;
+  height:30px;
+  opacity:0.5;
+  border-width:1px;
+  border-style:solid;
+  border-radius:50%;
+  right:15px;
+  top:25px;
+  text-align:center;
+  font-size:1.6em;
+  cursor:pointer;
+}
+
+.container {
+	width: 400px;
+	margin: 0 auto;
+	margin-top: 200px;
+	background: rgba(0, 0, 0, 0.4);
+	color: white;
+	backdrop-filter: blur(6px);
+	padding-top: 30px;
+	padding-bottom: 30px;
+	border-radius: 8px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.container h2 {
+	font-size: 2rem;
+	font-weight: bold;
+	margin-bottom: 30px;
+	text-align: center;
+	color: #FFF;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+.container h1 {
+	text-transform: uppercase;
+	text-align: center;
+}
+
+input[type="text"], input[type="password"] {
+	font-size: 17px;
+	width: 250px;
+	padding: 12px 20px;
+	margin: 10px 0;
+	display: inline-block;
+	border: none;
+	border-radius: 5px;
+	border-bottom: 2px solid #eee;
+	background-color: #f8f9fa;
+	color: #495057;
+	transition: border-bottom-color 0.2s ease-in-out;
+}
+
+.estiloSpan {
+	COLOR: red;
+	font-size: 14px;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+	border-bottom-color: #007bff;
+	outline: none;
+}
+
+.button {
+	background-color: #007bff;
+	color: #fff;
+	padding: 12px 20px;
+	margin-top: 30px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	width: 100%;
+	font-size: 1.1rem;
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	transition: background-color 0.2s ease-in-out;
+}
+
+.button:hover {
+	background-color: #0069d9;
+}
+
+p {
+	font-size: 15px;
+	text-align: center;
+	margin-top: 20px;
+	color: #FFF;
+}
+
+.container a {
+	color: #007bff;
+	text-decoration: none;
+	transition: color 0.2s ease-in-out;
+}
+
+.container a:hover {
+	color: #0069d9;
+}
+
+.msg {
+	color: red;
+	top: 50px;
+}
+
+.formLogin, #formulario {
+	width: 250px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}

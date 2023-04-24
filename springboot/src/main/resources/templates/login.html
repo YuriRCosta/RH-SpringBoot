@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+	<title>Cadastro Pessoa</title>
+	<link type="text/css" rel="stylesheet" href="/css/loginPage.css" media="screen,projection" />
+</head>
+<body>
+	
+	<div class="container">
+		<form id="formulario" th:action="@{/login}" method="post">
+			<h1>Login</h1>
+
+			<label>Login</label>
+			<input type="text" id="username" name="username" styleClass="campoLogin">
+
+			<label>Senha</label>
+			<input type="password" name="password">
+
+			<input value="Entrar" type="submit" name="Entrar" class="button">
+			<p>
+				Não tem uma conta? <a href="#">Cadastre-se</a>
+			</p>
+		</form>
+	</div>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+	<script>
+		$(".close").click(function() {
+			$(this).parent(".alert").fadeOut();
+		});
+
+		$("#username").focus();
+	</script>
+</body>
+</html>
